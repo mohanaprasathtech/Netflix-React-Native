@@ -31,28 +31,39 @@ const list = [
   },
   {
     id: 6,
-    quotes:"It is only when we take chances, when our lives improve. The initial and the most difficult risk that we need to take is to become honest.",
+    quotes:
+      'It is only when we take chances, when our lives improve. The initial and the most difficult risk that we need to take is to become honest.',
     author: 'Walter Anderson',
   },
   {
     id: 7,
-    quotes:"Nature has given us all the pieces required to achieve exceptional wellness and health, but has left it to us to put these pieces together.",
+    quotes:
+      'Nature has given us all the pieces required to achieve exceptional wellness and health, but has left it to us to put these pieces together.',
     author: 'Diane McLaren',
   },
   {
     id: 8,
-    quotes:"Success is not final; failure is not fatal: It is the courage to continue that counts.",
+    quotes:
+      'Success is not final; failure is not fatal: It is the courage to continue that counts.',
     author: 'Winston S. Churchill',
   },
   {
     id: 9,
-    quotes:"Develop success from failures. Discouragement and failure are two of the surest stepping stones to success.",
+    quotes:
+      'Develop success from failures. Discouragement and failure are two of the surest stepping stones to success.',
     author: 'Dale Carnegie',
   },
   {
     id: 10,
-    quotes:"There are three ways to ultimate success: The first way is to be kind. The second way is to be kind. The third way is to be kind.",
+    quotes:
+      'There are three ways to ultimate success: The first way is to be kind. The second way is to be kind. The third way is to be kind.',
     author: 'Mister Rogers',
+  },
+  {
+    id: 11,
+    quotes:
+      'You learn more from failure than from success. Don’t let it stop you. Failure builds character.',
+    author: 'Jim Rohn',
   },
 ];
 export default list;

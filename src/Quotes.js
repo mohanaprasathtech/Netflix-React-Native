@@ -1,75 +1,62 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
-import {
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-  responsiveScreenFontSize,
-} from 'react-native-responsive-dimensions';
+import React, {useEffect, useState} from 'react';
+import {responsiveScreenWidth} from 'react-native-responsive-dimensions';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import list from './Data';
+import Tts from 'react-native-tts';
+
+Tts.setDefaultLanguage('en-GB');
+Tts.setDefaultVoice('com.apple.ttsbundle.Moira-compact');
+Tts.setDefaultRate(0.5);
+Tts.setDefaultPitch(1.1);
+
 const Quotes = () => {
   const [index, setIndex] = useState(0);
+  const [isSpeaking, setisSpeaking] = useState(false);
+
   const handleChange = () => {
-    const max = 9;
+    const max = 10;
     const val = Math.floor(Math.random() * max) + 1;
     setIndex(val);
   };
+
+  const speak = () => {
+    Tts.stop();
+    Tts.speak(list[index].quotes);
+    Tts.addEventListener('tts-start', (event) => setisSpeaking(true));
+    Tts.addEventListener('tts-finish', (event) => setisSpeaking(false));
+  };
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.title}>Quotes for the day</Text>
-      <FontAwesome5
-        style={{
-          marginBottom: '-5%',
-        }}
-        name="quote-left"
-        size={20}
-      />
+      <FontAwesome5 style={styles.toparrow} name="quote-left" size={20} />
 
       <Text style={styles.quotes}>{list[index].quotes}</Text>
 
-      <FontAwesome5
-        style={{
-          textAlign: 'right',
-          marginTop: '-9%',
-          marginBottom: '7%',
-        }}
-        name="quote-right"
-        size={20}
-      />
+      <FontAwesome5 style={styles.downarrow} name="quote-right" size={20} />
       <Text style={styles.authorText}>— {list[index].author}</Text>
       <TouchableOpacity onPress={handleChange} style={styles.button}>
         <Text style={styles.buttonText}>New Quote</Text>
       </TouchableOpacity>
-      <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+      <View style={styles.buttonContainer}>
         <TouchableOpacity
-          style={{
-            borderWidth: 2,
-            padding: 20,
-            borderRadius: 50,
-            marginTop: '2%',
-            borderColor: '#5372F0',
-          }}>
-          <FontAwesome name="volume-up" size={22} color={'#5372F0'} />
+          onPress={speak}
+          style={[
+            styles.buttonArea,
+            {backgroundColor: isSpeaking ? '#5372F0' : '#fff'},
+          ]}>
+          <FontAwesome
+            name="volume-up"
+            size={22}
+            color={isSpeaking ? '#fff' : '#5372F0'}
+          />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            borderWidth: 2,
-            padding: 20,
-            borderRadius: 50,
-            marginTop: '2%',
-            borderColor: '#5372F0',
-          }}>
+        <TouchableOpacity style={styles.buttonArea}>
           <FontAwesome5 name="copy" size={22} color={'#5372F0'} />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            borderWidth: 2,
-            padding: 20,
-            borderRadius: 50,
-            marginTop: '2%',
-            borderColor: '#5372F0',
-          }}>
+        <TouchableOpacity style={styles.buttonArea}>
           <FontAwesome name="twitter" size={22} color={'#5372F0'} />
         </TouchableOpacity>
       </View>
@@ -120,5 +107,24 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: '#fff',
+  },
+  toparrow: {
+    marginBottom: '-5%',
+  },
+  downarrow: {
+    textAlign: 'right',
+    marginTop: '-9%',
+    marginBottom: '7%',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  buttonArea: {
+    borderWidth: 2,
+    padding: 20,
+    borderRadius: 50,
+    marginTop: '2%',
+    borderColor: '#5372F0',
   },
 });
