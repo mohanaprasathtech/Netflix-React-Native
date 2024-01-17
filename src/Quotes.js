@@ -1,13 +1,20 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   responsiveScreenHeight,
   responsiveScreenWidth,
   responsiveScreenFontSize,
 } from 'react-native-responsive-dimensions';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import list from './Data';
 const Quotes = () => {
+  const [index, setIndex] = useState(0);
+  const handleChange = () => {
+    const max = 9;
+    const val = Math.floor(Math.random() * max) + 1;
+    setIndex(val);
+  };
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.title}>Quotes for the day</Text>
@@ -18,23 +25,54 @@ const Quotes = () => {
         name="quote-left"
         size={20}
       />
-      <Text style={styles.quotes}>
-        We cannot solve problems with the kind of thinking we employed when we
-        came up with them.
-      </Text>
+
+      <Text style={styles.quotes}>{list[index].quotes}</Text>
+
       <FontAwesome5
         style={{
           textAlign: 'right',
-          marginTop: '-8%',
+          marginTop: '-9%',
           marginBottom: '7%',
         }}
         name="quote-right"
         size={20}
       />
-      <Text style={styles.authorText}>--Author name</Text>
-      <TouchableOpacity style={styles.button}>
+      <Text style={styles.authorText}>— {list[index].author}</Text>
+      <TouchableOpacity onPress={handleChange} style={styles.button}>
         <Text style={styles.buttonText}>New Quote</Text>
       </TouchableOpacity>
+      <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+        <TouchableOpacity
+          style={{
+            borderWidth: 2,
+            padding: 20,
+            borderRadius: 50,
+            marginTop: '2%',
+            borderColor: '#5372F0',
+          }}>
+          <FontAwesome name="volume-up" size={22} color={'#5372F0'} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            borderWidth: 2,
+            padding: 20,
+            borderRadius: 50,
+            marginTop: '2%',
+            borderColor: '#5372F0',
+          }}>
+          <FontAwesome5 name="copy" size={22} color={'#5372F0'} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            borderWidth: 2,
+            padding: 20,
+            borderRadius: 50,
+            marginTop: '2%',
+            borderColor: '#5372F0',
+          }}>
+          <FontAwesome name="twitter" size={22} color={'#5372F0'} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -62,7 +100,7 @@ const styles = StyleSheet.create({
     lineHeight: 28,
     fontWeight: '400',
     marginBottom: '10%',
-    marginHorizontal: '5%',
+    marginHorizontal: '7%',
   },
   authorText: {
     fontSize: 17,
