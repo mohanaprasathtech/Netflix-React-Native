@@ -5,7 +5,7 @@ import Quotes from './src/Quotes';
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar barStyle={'light-content'}/>
+      <StatusBar barStyle={'light-content'} translucent backgroundColor={'#5372F0'}/>
       <Quotes/>
     </View>
   );

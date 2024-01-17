@@ -26,8 +26,8 @@ const Quotes = () => {
   const speak = () => {
     Tts.stop();
     Tts.speak(list[index].quotes);
-    Tts.addEventListener('tts-start', event => setisSpeaking(true));
-    Tts.addEventListener('tts-finish', event => setisSpeaking(false));
+    Tts.addEventListener('tts-start', (event) => setisSpeaking(true));
+    Tts.addEventListener('tts-finish', (event) => setisSpeaking(false));
   };
 
   const copyClipboard = () => {
