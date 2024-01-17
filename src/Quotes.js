@@ -1,10 +1,12 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View,Linking} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {responsiveScreenWidth} from 'react-native-responsive-dimensions';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import list from './Data';
 import Tts from 'react-native-tts';
+import Clipboard from '@react-native-clipboard/clipboard';
+import Snackbar from 'react-native-snackbar';
 
 Tts.setDefaultLanguage('en-GB');
 Tts.setDefaultVoice('com.apple.ttsbundle.Moira-compact');
@@ -24,9 +26,22 @@ const Quotes = () => {
   const speak = () => {
     Tts.stop();
     Tts.speak(list[index].quotes);
-    Tts.addEventListener('tts-start', (event) => setisSpeaking(true));
-    Tts.addEventListener('tts-finish', (event) => setisSpeaking(false));
+    Tts.addEventListener('tts-start', event => setisSpeaking(true));
+    Tts.addEventListener('tts-finish', event => setisSpeaking(false));
   };
+
+  const copyClipboard = () => {
+    Clipboard.setString(list[index].quotes);
+    Snackbar.show({
+      text: 'Quote copied',
+      duration: Snackbar.LENGTH_SHORT,
+    });
+  };
+
+  const tweet=()=>{
+    const url = 'https://twitter.com/intent/tweet?text=' + list[index].quotes
+    Linking.openURL(url)
+  }
 
   return (
     <View style={styles.mainContainer}>
@@ -53,10 +68,10 @@ const Quotes = () => {
             color={isSpeaking ? '#fff' : '#5372F0'}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonArea}>
+        <TouchableOpacity onPress={copyClipboard} style={styles.buttonArea}>
           <FontAwesome5 name="copy" size={22} color={'#5372F0'} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonArea}>
+        <TouchableOpacity onPress={tweet} style={styles.buttonArea}>
           <FontAwesome name="twitter" size={22} color={'#5372F0'} />
         </TouchableOpacity>
       </View>
