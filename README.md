@@ -6,8 +6,8 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 ## Result:
 
-![Alt text](/src/result.png? =250x250)
 <img src="/src/result.png" alt="drawing" width="200"/>
+<img src="/src/result1.png" alt="drawing" width="200"/>
 ```
 
 ## Step 2: Start your Application
