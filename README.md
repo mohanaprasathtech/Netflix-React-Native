@@ -6,7 +6,7 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 ## Result:
 
-![Alt text](/src/result.png?raw=true "Optional Title")
+![Alt text](/src/result.png?=100x20)
 ```
 
 ## Step 2: Start your Application
